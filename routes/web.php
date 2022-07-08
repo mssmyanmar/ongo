@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,11 @@ use App\Http\Controllers\StaffController;
 */
 
 Route::get('/', function () {
-    return view('staff.index');
+    return view('login');
 });
 
-Auth::routes();
-Route::middleware('auth')->group(function () {
-Route::resource('staffs', StaffController::class);
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'postLoginForm'])->name('login');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::middleware('user')->group(function () {
+    Route::resource('users', UserController::class);
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

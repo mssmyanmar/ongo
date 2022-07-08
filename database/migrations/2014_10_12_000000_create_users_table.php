@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('phone_number');
             $table->string('password');
             $table->string('address');
+            $table->string('nrc')->default(null);
             $table->boolean('active_status');
             $table->rememberToken();
             $table->softDeletes(); 
