@@ -21,7 +21,10 @@ class CreateInputFieldsTable extends Migration
             $table->integer('display_order');
             $table->string('field_type');
             $table->boolean('isRequired');
-            $table->string('branch_data');
+            $table->string('min')->default(null);
+            $table->string('max')->default(null);
+            $table->string('branch_data')->default(null);
+            $table->softDeletes(); 
             $table->timestamps();
             $table->foreign('client_id')
                     ->references('id')->on('clients')

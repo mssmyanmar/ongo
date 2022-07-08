@@ -25,6 +25,7 @@ class CreateStoreCashesTable extends Migration
             $table->string('remarks');
             $table->boolean('sync_status');
             $table->date('collected_date');
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }
