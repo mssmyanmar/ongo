@@ -13,8 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('fontawesome/css/all.min.css')}}" rel="stylesheet">
@@ -35,7 +34,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon" >
+                <div class="sidebar-brand-icon">
                     <img src="{{asset('template/img/OnGo_logo.svg')}}" alt="" style="width:135px;height:40px;">
                 </div>
                 {{-- <div class="sidebar-brand-text mx-3"><span class="" style="text-transform: lowercase;color:#72F573">on</span><span class="" style=" text-transform: lowercase;">go</span></div> --}}
@@ -46,20 +45,22 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link a-blue" href="#">
                     <span>Dashboard</span></a>
             </li>
 
-             <!-- Nav Item - User Managements -->
-             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <span>User Managements</span></a>
-             </li>
+            <!-- Nav Item - User Management -->
+            <li class="nav-item">
+                <a class="nav-link a-blue" href="#">
+                    <span>User Management</span></a>
+            </li>
 
             <!-- Nav Item - Reports -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link a-blue" href="#">
+                    <span>Reports</span>
+                </a>
+                <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <span>Reports</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -68,7 +69,7 @@
                         <a class="collapse-item text-white" href="utilities-color.html">Transaction Reports</a>
                         <a class="collapse-item text-white" href="utilities-border.html">User Reports</a>
                     </div>
-                </div>
+                </div> -->
             </li>
 
 
@@ -101,15 +102,12 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Zaw Zaw<br>Super Admin</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{asset('template/img/undraw_profile.svg')}}">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session()->get('name')}}<br>Super Admin</span>
+                                <img class="img-profile rounded-circle" src="{{asset('template/img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -151,8 +149,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,8 +161,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary"  href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
+                    <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
