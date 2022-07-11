@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::prefix('staff')->group(function () {
+Route::prefix('staff/v1/')->group(function () {
     Route::post('/login',  [App\Http\Controllers\api\v1\LoginController::class, 'login'])->name('staffLogin');
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/allClients',  [App\Http\Controllers\api\v1\ClientController::class, 'index'])->name('allClients');
+    });
+    
 });

@@ -13,22 +13,19 @@ class LoginController extends Controller
 {
     public function login(Request $request){
         $login = $request->validate([
-            'phone'     => ['required','numeric'],
-            'password'  => ['required','min:6'],
+            'phone_number'  => ['required','numeric'],
+            'password'      => ['required','min:6'],
         ]);
         if($login){
-            $staff = Staff::where('phone_number',$request->phone)->first();
-            if($staff!=null){
-                if(Hash::check($request->password, $staff->user->password)){
-                    $accesstoken = $staff->createToken('authToken')->accessToken;
-                    return response(['staff'=>$staff,"accesstoken"=>$accesstoken]);
-                }else{
-                    return response(['message'=>'Password Incorrect!']);
-                }         
+            $user = User::where('phone_number',$request->phone_number)->where('password',$request->password)->first();
+            if($user!=null){
+                $accesstoken = $user->createToken('authToken')->accessToken;
+                return response(["response_code" => "200200",
+                                'staff'          => $user,
+                                "accesstoken"    => $accesstoken]);       
             }else{
-                return response(['message'=>'Invalid Phone Number!']);
+                return response(['message'=>'Invalid Phone number and password!']);
             }
-           
         }else{
             return response(['message'=>'Invalid login credentials!']);
         }

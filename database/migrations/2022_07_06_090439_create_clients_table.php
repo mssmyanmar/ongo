@@ -20,7 +20,7 @@ class CreateClientsTable extends Migration
             $table->string('client_name');
             $table->string('display_name');
             $table->integer('client_type');
-            $table->string('client_image');
+            $table->text('client_image');
             $table->string('client_category'); 
             $table->integer('phone_number');
             $table->string('address');
