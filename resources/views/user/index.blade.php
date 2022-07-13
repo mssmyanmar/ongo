@@ -19,7 +19,7 @@
                     <input type="text" class="form-control shadow" id="role" placeholder="Enter Role">
                 </div>
                 <div class="ml-4">
-                    <button type="button" class="btn btn-dark px-3"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</button>
+                    <button type="button" class="btn btn-dark px-3 btn_search"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</button>
                 </div>
             </div>
         </div>
@@ -106,6 +106,21 @@
                 }
             }
         });
+
+        $(".btn_search").click(function(){
+                // $.ajax({
+                //     url: "http://localhost:8000/api/staff/v1/sync/",
+                //     data: {
+                //         array:[{"staff_name":"mg mg","Address":"Yangon",},{"staff_name":"mg mg", "Address":"Yangon",}]
+                //     },
+                //     dataType: "json",
+                //     type: "post"
+                // }).done(function(data) {
+
+                //     console.log(data);
+
+                // });
+        })
     })
 </script>
 @endsection
