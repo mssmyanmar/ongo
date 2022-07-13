@@ -27,6 +27,12 @@ class CreateStoreCashesTable extends Migration
             $table->date('collected_date');
             $table->softDeletes(); 
             $table->timestamps();
+            $table->foreign('staff_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
+            $table->foreign('company_id')
+                    ->references('id')->on('clients')
+                    ->onDelete('cascade');
         });
     }
 

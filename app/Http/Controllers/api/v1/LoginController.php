@@ -28,7 +28,7 @@ class LoginController extends Controller
                                  "internal_message" => "Fetching staff info is successful!", 
                                  "date_time_utc"    => $mytime, 
                                  "data"             => [
-                                "staff"            => $user,
+                                 "staff"            => $user,
                                  "accesstoken"      => $accesstoken
                                  ]]);       
             }else{
