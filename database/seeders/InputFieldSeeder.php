@@ -66,6 +66,18 @@ class InputFieldSeeder extends Seeder
                 'branch_data'     => null,
                 'created_at'      => $mytime,
             ],
+            [
+                'client_id'       => 2,
+                'display_name'    => 'Branch',
+                'validation_regx' => '[0-9]+',
+                'display_order'   => '3',
+                'field_type'      => 'list',
+                'isRequired'      => true,
+                'min'             => null,
+                'max'             => null,
+                'branch_data'     => '1,2,3,4',
+                'created_at'      => $mytime,
+            ],
         ]);
     }
 }

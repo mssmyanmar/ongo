@@ -22,7 +22,8 @@ class InputFieldResource extends JsonResource
             'field_type'        => $this->field_type, 
             'is_required'       => $this->isRequired, 
             'min'               => $this->min, 
-            'max'               => $this->max, 
+            'max'               => $this->max,
+            'branch_data'       => $this->branch_data,
         ];
     }
 }
