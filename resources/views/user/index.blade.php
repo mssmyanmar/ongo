@@ -6,7 +6,7 @@
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h6 class="um-title">User Management</h6>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <input class="form-check-input" type="checkbox" id="active_only" class="active_only">
                 <label class="form-check-label active-or-not" for="defaultCheck1">
                     Active Only
                 </label>
@@ -56,17 +56,17 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->phone_number}}</td>
                                     <td>{{$user->roles->pluck('name')[0]}}</td>
-                                    <td>5/khaoota(n)091303</td>
+                                    <td>{{$user->nrc}}</td>
                                     <td>
                                         <div class="t-flex-center">
                                             <label class="switch my-auto">
-                                                <input type="checkbox" @if($user->active_status==0) checked @endif>
+                                                <input type="checkbox" value="{{$user->id}}" class="btn_status" @if($user->active_status==0) checked @endif>
                                                 <span class="slider round"></span>
                                             </label>
                                             @if($user->active_status==0)
-                                            <span class="my-auto">Active</span>
+                                            <span class="my-auto" id = "active_label{{$user->id}}">Active</span>
                                             @else
-                                            <span class="my-auto">Inactive</span>
+                                            <span class="my-auto" id = "active_label{{$user->id}}">Inactive</span>
                                             @endif
                                         </div>
                                     </td>
@@ -80,6 +80,7 @@
                                                 @method('DELETE')
                                                 <button class="btn" type="submit"><i class="fa-solid fa-trash" style="color:#72F573"></i></button>
                                             </form>
+                                        </div>
                                     </th>
                                 </tr>
                                 @endforeach
@@ -107,20 +108,163 @@
             }
         });
 
-        $(".btn_search").click(function(){
-                // $.ajax({
-                //     url: "http://localhost:8000/api/staff/v1/sync/",
-                //     data: {
-                //         array:[{"staff_name":"mg mg","Address":"Yangon",},{"staff_name":"mg mg", "Address":"Yangon",}]
-                //     },
-                //     dataType: "json",
-                //     type: "post"
-                // }).done(function(data) {
-
-                //     console.log(data);
-
-                // });
+       $("#myTable").on('click','.btn_status',function(){
+            var user_id = $(this).val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('changeStatus') }}",
+                data: {
+                    user_id:user_id
+                },
+                type: 'POST',
+                dataType: 'json',
+                global: false,
+                async: false,
+                success: function(result) {
+                    if (result) {
+                        if (result.success) {
+                            if(result.active_status==1){
+                                $(`#active_label${user_id}`).html("Inactive")
+                            }else{
+                                $(`#active_label${user_id}`).html("Active")
+                            }
+                        } else {
+                            alert(result.error)
+                        }
+                    }
+                }
+            })
         })
+
+
+        $('#active_only').change(function() {
+             if(this.checked) {
+                var table = $('#myTable').DataTable();
+                table.destroy();
+                $('#myTable').dataTable({
+                    "pageLength": 10,
+                    lengthMenu: [
+                        [10, 25, 50, 100, -1],
+                        [10, 25, 50, 100],
+                    ],
+                    language: {
+                        oPaginate: {
+                            sNext: '>',
+                            sPrevious: '<',
+                        }
+                    },
+                    "bPaginate": true,
+                    "bLengthChange": true,
+                    "bFilter": false,
+                    "bSort": false,
+                    "bInfo": true,
+                    "bAutoWidth": true,
+                    "bStateSave": true,
+                    "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [-1]
+                    }, ],
+                    "bserverSide": true,
+                    "bprocessing": true,
+                    "ajax": {
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('activeUser') }}",
+                        type: 'GET',
+                        dataType: 'json',
+                        global: false,
+                        async: true,
+                    },
+                    "columns": [{
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                console.log(data.name)
+                                return "1";
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.name
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.phone_number
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return "staff"
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.nrc
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                            if(data.active_status==0){
+                                return `<div class="t-flex-center">
+                                            <label class="switch my-auto">
+                                                <input type="checkbox" value="${data.id}" class="btn_status" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <span class="my-auto" id="active_label${data.id}">Active</span>
+                                        </div>`
+                            }else{
+                                return `<div class="t-flex-center">
+                                            <label class="switch my-auto">
+                                                <input type="checkbox" value="${data.id}" class="btn_status">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <span class="my-auto" id="active_label${data.id}">Inactive</span>
+                                        </div>`
+                            }
+                                
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.address
+                            }
+                        },
+                        {
+                        "data":null,
+                        render:function(data, type, full, meta){
+                            var userdelete="{{route('users.destroy',":id")}}"
+                            userdelete=userdelete.replace(':id',data.id);
+                            var userediturl="{{route('users.edit',":id")}}"
+                            userediturl=userediturl.replace(':id',data.id);
+                            return `
+                            <div class="t-flex-center">
+                            <a href="${userediturl}" class="btn"><i class="fa-solid fa-pen-to-square" style="color:#72F573"></i></a>
+                            <form action="${userdelete}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn" type="submit"><i class="fa-solid fa-trash" style="color:#72F573"></i></button>
+                            </form>
+                            </div>`
+                        }
+                        }
+                    ],
+                    "info": true
+                });
+        
+            }else{
+                location.reload();
+            }
+               
+        });
     })
 </script>
 @endsection

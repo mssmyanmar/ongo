@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -157,6 +158,26 @@ class UserController extends Controller
         $user=User::find($id);
         DB::table('model_has_roles')->where('model_id',$user->id)->delete();
         $user->delete();
-       return redirect()->route('users.index')->with('successMsg','Existing User is DELETED in your data');
+        return redirect()->route('users.index')->with('successMsg','Existing User is DELETED in your data');
+    }
+
+    public function changeStatus(Request $request){
+        $user=User::find($request->user_id);
+        if($user->active_status==0){
+            $user->active_status=1;
+        }else{
+            $user->active_status=0;
+        }
+        $user->save();
+        return response()->json([
+            'success'       => 'change status successfully',
+            'active_status' => $user->active_status,
+            'user_id'       => $user->id,
+        ]);
+    }
+
+    public function activeUser(Request $request){
+        $users = User::where('active_status',0)->get();
+        return Datatables::of($users)->addIndexColumn()->toJson();
     }
 }

@@ -23,4 +23,6 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'postLo
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::middleware('user')->group(function () {
     Route::resource('users', UserController::class);
+    Route::post('/changeStatus', [App\Http\Controllers\UserController::class, 'changeStatus'])->name('changeStatus');
+    Route::get('/activeUser', [App\Http\Controllers\UserController::class, 'activeUser'])->name('activeUser');
 });
