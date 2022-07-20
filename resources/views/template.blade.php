@@ -51,13 +51,13 @@
 
             <!-- Nav Item - User Management -->
             <li class="nav-item">
-                <a class="nav-link a-blue" href="#">
+                <a class="nav-link a-blue" href="{{route('users.index')}}">
                     <span>User Management</span></a>
             </li>
 
             <!-- Nav Item - Reports -->
             <li class="nav-item">
-                <a class="nav-link a-blue" href="#">
+                <a class="nav-link a-blue" href="{{route('report')}}">
                     <span>Reports</span>
                 </a>
                 <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

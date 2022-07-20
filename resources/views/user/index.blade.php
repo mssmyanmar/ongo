@@ -94,7 +94,6 @@
 </div>
 @endsection
 @section('script')
-
 <script type="text/javascript">
     $(document).ready(function() {
         $('#myTable').dataTable({
@@ -181,7 +180,6 @@
                     "columns": [{
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                                console.log(data.name)
                                 return "1";
                             }
                         },

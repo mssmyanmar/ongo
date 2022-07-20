@@ -11,7 +11,7 @@ class SyncController extends Controller
 {
     public function sync(Request $request){
         $syncArray = $request->dataArray;
-        $mytime = Carbon::now();
+        $mytime = Carbon::now()->setTimezone('Asia/Yangon');
         if(count($syncArray)>0);{
             foreach ($syncArray as $key => $value) {
                 $storeCash                 = new storeCash;
@@ -25,6 +25,12 @@ class SyncController extends Controller
                 $storeCash->remarks        = $value['remark'];
                 $storeCash->sync_status    = $value['sync_status'];
                 $storeCash->collected_date = $mytime;
+                if(isset($value['branch_id'])){
+                    $storeCash->branch_id      = $value['branch_id'];
+                }
+                if(isset($value['loan_id'])){
+                    $storeCash->loan_id        = $value['loan_id'];
+                }
                 $storeCash->save();
             }
             return response(["response_code"    => "200203",

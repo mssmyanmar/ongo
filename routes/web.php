@@ -25,4 +25,5 @@ Route::middleware('user')->group(function () {
     Route::resource('users', UserController::class);
     Route::post('/changeStatus', [App\Http\Controllers\UserController::class, 'changeStatus'])->name('changeStatus');
     Route::get('/activeUser', [App\Http\Controllers\UserController::class, 'activeUser'])->name('activeUser');
+    Route::get('/report', [App\Http\Controllers\ReportController::class, 'report'])->name('report');
 });

@@ -25,10 +25,15 @@ class CreateStoreCashesTable extends Migration
             $table->string('remarks');
             $table->boolean('sync_status');
             $table->date('collected_date');
+            $table->unsignedBigInteger('branch_id')->nullable()->default(null);
+            $table->unsignedBigInteger('loan_id')->nullable()->default(null);
             $table->softDeletes(); 
             $table->timestamps();
             $table->foreign('staff_id')
                     ->references('id')->on('users')
+                    ->onDelete('cascade');
+            $table->foreign('branch_id')
+                    ->references('id')->on('branches')
                     ->onDelete('cascade');
             $table->foreign('company_id')
                     ->references('id')->on('clients')

@@ -15,7 +15,6 @@ class BranchSeeder extends Seeder
     public function run()
     {
         $mytime = Carbon::now();
-        DB::table('branches')->truncate();
         DB::table('branches')->insert([
             [
                 'branch_name' => 'Aung Lan - 049',

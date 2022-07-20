@@ -12,6 +12,6 @@ class storeCash extends Model
     protected $fillable=[
         'staff_id', 'staff_name', 'company_id', 'merchant_id', 'company_name',
         'amount', 'description', 'remarks',
-        'sync_status', 'collected_date',
+        'sync_status', 'collected_date','branch_id','loan_id'
     ];
 }
