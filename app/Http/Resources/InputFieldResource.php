@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Branch;
+use App\Http\Resources\BranchResource;
 
 class InputFieldResource extends JsonResource
 {
@@ -14,6 +16,14 @@ class InputFieldResource extends JsonResource
      */
     public function toArray($request)
     {
+        $branchArray = [];
+        if(isset($this->branch_data)){
+            $dataArray = explode(',', $this->branch_data);
+            for($i=0; $i < sizeof($dataArray); $i++){
+                $branchlist = Branch::where('id',$dataArray[$i])->first();
+                array_push($branchArray,new BranchResource($branchlist));
+            }
+        }
         return [
             'id'                => $this->id,
             'display_name'      => $this->display_name, 
@@ -23,7 +33,7 @@ class InputFieldResource extends JsonResource
             'is_required'       => $this->isRequired, 
             'min'               => $this->min, 
             'max'               => $this->max,
-            'branch_data'       => $this->branch_data,
+            'branch_data'       => isset($this->branch_data)?$branchArray:null,
         ];
     }
 }
