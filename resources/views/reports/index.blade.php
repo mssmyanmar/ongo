@@ -39,26 +39,21 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>User Name</th>
-                                <th>Phone</th>
-                                <th>Role</th>
-                                <th>Nrc</th>
-                                <th>Status</th>
-                                <th>Address</th>
-                                <th></th>
+                                <th>Staff/Agent Name</th>
+                                <th>Staff/Agent ID</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>No</td>
-                                <td>User Name</td>
-                                <td>Phone</td>
-                                <td>Role</td>
-                                <td>Nrc</td>
-                                <td>Status</td>
-                                <td>Address</td>
-                                <td></td>
-                            </tr>
+                            @php $no=1; @endphp
+                            @foreach($users as $row)
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td>{{$row->name}}</td>
+                                    <td>{{$row->code}}D</td>
+                                    <td>{{$row->roles->pluck('name')[0]}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                   </div>
@@ -96,8 +91,8 @@
                         <tbody>
                             @foreach($transactions as $row)
                                 <tr>
-                                    <td>{{$row->collected_date}}</td>
-                                    <td>{{$row->created_at->format('H:i A');}}</td>
+                                    <td>{{Carbon\Carbon::parse($row->collected_date)->format('Y-m-d')}}</td>
+                                    <td>{{Carbon\Carbon::parse($row->collected_date)->timezone('Asia/Yangon')->format('h:i A');}}</td>
                                     <td>{{$row->merchant_id}}</td>
                                     <td>{{$row->company_name}}</td>
                                     <td>{{$row->staff_name }}</td>

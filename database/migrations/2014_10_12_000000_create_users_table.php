@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('nrc')->nullable()->default(null);
             $table->boolean('active_status');
+            $table->string('code')->nullable()->default(null);
             $table->rememberToken();
             $table->softDeletes(); 
             $table->timestamps();

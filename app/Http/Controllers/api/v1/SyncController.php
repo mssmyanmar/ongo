@@ -11,7 +11,7 @@ class SyncController extends Controller
 {
     public function sync(Request $request){
         $syncArray = $request->dataArray;
-        $mytime = Carbon::now()->setTimezone('Asia/Yangon');
+        $mytime = Carbon::now();
         if(count($syncArray)>0);{
             foreach ($syncArray as $key => $value) {
                 $storeCash                 = new storeCash;

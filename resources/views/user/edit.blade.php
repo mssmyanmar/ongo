@@ -57,7 +57,6 @@
               </div>
               <div class="fg-if-width">
                 <!-- User Role -->
-                {{$user->roles->pluck('id')[0]}}
                 <div class="form-group pos-r">
                   <label for="userrole">User Role</label>
                   <select
@@ -75,6 +74,20 @@
                   <i class="fa fa-chevron-down"></i>
                 </div>
                 <div class="form-control-feedback text-danger"> {{$errors->first('role') }} </div>
+              </div>
+              <div class="fg-if-width staff-code d-none">
+                <!-- Staff/Agent Code -->
+                <div class="form-group">
+                  <label for="code">Staff/Agent Code</label>
+                  <input
+                    type="text"
+                    class="form-control py-3 bdr-gray br-8p fc-21 codebyrole"
+                    id="code"
+                    name="code"
+                    value="{{$user->code}}"
+                  />
+                  <div class="form-control-feedback text-danger"> {{$errors->first('code') }} </div>
+                </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 mb-3 mt-sm-0">
@@ -139,7 +152,25 @@
       </div>
 </div>
 @endsection
-
-
-
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+      if($("#userrole").val() == 3 || $("#userrole").val() == 4 ){
+        $(".staff-code").removeClass("d-none");      
+          $(".staff-code").show();
+      }
+      $("#userrole").change(function(){
+        let role = $(this).val();
+        if(role==3 || role==4){
+          $(".staff-code").removeClass("d-none");      
+          $(".staff-code").show();
+        }else{
+          $(".codebyrole").val(' ');
+          $(".staff-code").addClass("d-none");
+          $(".staff-code").hide();
+        }
+      })
+    })
+</script>
+@endsection
                         

@@ -22,7 +22,7 @@ class CreateStoreCashesTable extends Migration
             $table->string('company_name');
             $table->integer('amount');
             $table->string('description');
-            $table->string('remarks');
+            $table->string('remarks')->nullable()->default(null);
             $table->boolean('sync_status');
             $table->timestamp('collected_date');
             $table->unsignedBigInteger('branch_id')->nullable()->default(null);

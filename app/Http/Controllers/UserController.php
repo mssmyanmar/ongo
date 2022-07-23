@@ -40,13 +40,13 @@ class UserController extends Controller
     {
         //dd($request);
         $validator = $request->validate([
-            'name'  => ['required', 'string', 'max:255'],
-            'password'  => ['required','min:6',],
-            'phone_number'  => ['required'],
-            'address'  => ['required','string'],
-            'role'  => ['required'],
+            'name'           => ['required', 'string', 'max:255'],
+            'password'       => ['required','min:6',],
+            'phone_number'   => ['required','unique:users'],
+            'address'        => ['required','string'],
+            'role'           => ['required'],
             'active_status'  => ['required','boolean'],
-            'nrc'  => ['string','unique:users'],
+            'nrc'            => ['string','unique:users'],
         ]);
         if($validator){
             $user                = new User;
@@ -56,6 +56,11 @@ class UserController extends Controller
             $user->address       = $request->address;
             $user->active_status = $request->active_status;
             $user->nrc           = $request->nrc;
+            if(isset($request->code)){
+                $user->code = $request->code;
+            }else{
+                $user->code = null;
+            }
             $user->save();
             if($request->role=="1"){
                 $user->assignRole('admin');
@@ -110,13 +115,13 @@ class UserController extends Controller
     {
         //dd($request);
         $validator = $request->validate([
-            'name'  => ['required', 'string', 'max:255'],
-            'password'  => ['required','min:6',],
-            'phone_number'  => ['required'],
-            'address'  => ['required','string'],
-            'role'  => ['required'],
+            'name'           => ['required', 'string', 'max:255'],
+            'password'       => ['required','min:6',],
+            'phone_number'   => ['required'],
+            'address'        => ['required','string'],
+            'role'           => ['required'],
             'active_status'  => ['required','boolean'],
-            'nrc'  => ['string'],
+            'nrc'            => ['string'],
         ]);
         if($validator){
             $user                = User::find($id);
@@ -126,6 +131,11 @@ class UserController extends Controller
             $user->address       = $request->address;
             $user->active_status = $request->active_status;
             $user->nrc           = $request->nrc;
+            if(isset($request->code)){
+                $user->code = $request->code;
+            }else{
+                $user->code = null;
+            }
             $user->save();
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
             if($request->role=="1"){
@@ -177,7 +187,11 @@ class UserController extends Controller
     }
 
     public function activeUser(Request $request){
-        $users = User::where('active_status',0)->get();
+        $users = User::select('users.*','roles.name as role_name')
+                 ->where('users.active_status',0)
+                 ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                 ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                 ->get();
         return Datatables::of($users)->addIndexColumn()->toJson();
     }
 }

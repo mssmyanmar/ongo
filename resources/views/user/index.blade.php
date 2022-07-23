@@ -60,13 +60,13 @@
                                     <td>
                                         <div class="t-flex-center">
                                             <label class="switch my-auto">
-                                                <input type="checkbox" value="{{$user->id}}" class="btn_status" @if($user->active_status==0) checked @endif>
+                                                <input type="checkbox" disabled="disabled" class="btn_status" @if($user->active_status==0) checked @endif>
                                                 <span class="slider round"></span>
                                             </label>
                                             @if($user->active_status==0)
-                                            <span class="my-auto" id = "active_label{{$user->id}}">Active</span>
+                                            <span class="my-auto">Active</span>
                                             @else
-                                            <span class="my-auto" id = "active_label{{$user->id}}">Inactive</span>
+                                            <span class="my-auto">Inactive</span>
                                             @endif
                                         </div>
                                     </td>
@@ -106,37 +106,6 @@
                 }
             }
         });
-
-       $("#myTable").on('click','.btn_status',function(){
-            var user_id = $(this).val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('changeStatus') }}",
-                data: {
-                    user_id:user_id
-                },
-                type: 'POST',
-                dataType: 'json',
-                global: false,
-                async: false,
-                success: function(result) {
-                    if (result) {
-                        if (result.success) {
-                            if(result.active_status==1){
-                                $(`#active_label${user_id}`).html("Inactive")
-                            }else{
-                                $(`#active_label${user_id}`).html("Active")
-                            }
-                        } else {
-                            alert(result.error)
-                        }
-                    }
-                }
-            })
-        })
-
 
         $('#active_only').change(function() {
              if(this.checked) {
@@ -180,7 +149,8 @@
                     "columns": [{
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                                return "1";
+                                let no = 1;
+                                return no;
                             }
                         },
                         {
@@ -198,7 +168,7 @@
                         {
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                                return "staff"
+                                return data.role_name
                             }
                         },
                         {
@@ -210,24 +180,13 @@
                         {
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                            if(data.active_status==0){
                                 return `<div class="t-flex-center">
                                             <label class="switch my-auto">
-                                                <input type="checkbox" value="${data.id}" class="btn_status" checked>
+                                                <input type="checkbox" class="btn_status" disabled="disabled" checked>
                                                 <span class="slider round"></span>
                                             </label>
-                                            <span class="my-auto" id="active_label${data.id}">Active</span>
-                                        </div>`
-                            }else{
-                                return `<div class="t-flex-center">
-                                            <label class="switch my-auto">
-                                                <input type="checkbox" value="${data.id}" class="btn_status">
-                                                <span class="slider round"></span>
-                                            </label>
-                                            <span class="my-auto" id="active_label${data.id}">Inactive</span>
-                                        </div>`
-                            }
-                                
+                                            <span class="my-auto">Active</span>
+                                        </div>`           
                             }
                         },
                         {
