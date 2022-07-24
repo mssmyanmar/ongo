@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $user->phone_number  = "0987654321";
         $user->password      = 123456789;
         $user->address       = "Yangon";
-        $user->active_status = 0;
+        $user->active_status = 1;
         $user->nrc           = "5/khaoota(n)123456";
         $user->save();
         $user->assignRole('admin');
@@ -28,8 +28,9 @@ class UserSeeder extends Seeder
         $user->phone_number  = "0987654322";
         $user->password      = 123456789;
         $user->address       = "Yangon";
-        $user->active_status = 0;
+        $user->active_status = 1;
         $user->nrc           = "5/khaoota(n)112233";
+        $user->code          = "1234";
         $user->save();
         $user->assignRole('staff');
 
@@ -38,8 +39,9 @@ class UserSeeder extends Seeder
         $user->phone_number  = "0987654323";
         $user->password      = 123456789;
         $user->address       = "Yangon";
-        $user->active_status = 1;
+        $user->active_status = 0;
         $user->nrc           = "5/khaoota(n)445566";
+        $user->code          = "5678";
         $user->save();
         $user->assignRole('staff');
     }

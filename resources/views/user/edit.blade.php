@@ -115,8 +115,8 @@
                     id="userstatus" name="active_status"
                   >
                     <option selected value="">Select the status of the user</option>
-                    <option value="0" @if($user->active_status==0) selected @endif>Active</option>
-                    <option value="1" @if($user->active_status==1) selected @endif>Inactive</option>
+                    <option value="1" @if($user->active_status==1) selected @endif>Active</option>
+                    <option value="0" @if($user->active_status==0) selected @endif>Inactive</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>

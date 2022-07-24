@@ -60,10 +60,10 @@
                                     <td>
                                         <div class="t-flex-center">
                                             <label class="switch my-auto">
-                                                <input type="checkbox" disabled="disabled" class="btn_status" @if($user->active_status==0) checked @endif>
+                                                <input type="checkbox" disabled="disabled" class="btn_status" @if($user->active_status==1) checked @endif>
                                                 <span class="slider round"></span>
                                             </label>
-                                            @if($user->active_status==0)
+                                            @if($user->active_status==1)
                                             <span class="my-auto">Active</span>
                                             @else
                                             <span class="my-auto">Inactive</span>

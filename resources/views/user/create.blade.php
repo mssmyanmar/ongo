@@ -113,8 +113,8 @@
                     id="userstatus" name="active_status"
                   >
                     <option selected value="">Select the status of the user</option>
-                    <option value="0">Active</option>
-                    <option value="1">Inactive</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>
