@@ -27,6 +27,7 @@ class CreateStoreCashesTable extends Migration
             $table->timestamp('collected_date');
             $table->unsignedBigInteger('branch_id')->nullable()->default(null);
             $table->unsignedBigInteger('loan_id')->nullable()->default(null);
+            $table->string('unique_id')->nullable()->default(null);
             $table->softDeletes(); 
             $table->timestamps();
             $table->foreign('staff_id')

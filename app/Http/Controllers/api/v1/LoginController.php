@@ -14,7 +14,16 @@ use App\Http\Requests\LoginRequest;
 class LoginController extends Controller
 {
     public function login(LoginRequest $request){
-            $user = User::where('phone_number',$request->phone_number)->where('password',$request->password)->where('active_status',1)->first();
+            $phArray = str_split($request->phone_number);
+            if($phArray[0]=="9"){
+            unset($phArray[0]);
+            unset($phArray[1]);
+            $stringPhone = "0"+implode("",$phArray);
+            }else{
+            $stringPhone = $request->phone_number;
+            }
+            
+            $user = User::where('phone_number',$stringPhone)->where('password',$request->password)->where('active_status',1)->first();
             if($user!=null){
                 $role = $user->getRoleNames();
                 if($role[0]=="staff" || $role[0]=="agent"){

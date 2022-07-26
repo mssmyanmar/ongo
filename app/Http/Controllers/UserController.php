@@ -188,7 +188,7 @@ class UserController extends Controller
 
     public function activeUser(Request $request){
         $users = User::select('users.*','roles.name as role_name')
-                 ->where('users.active_status',0)
+                 ->where('users.active_status',1)
                  ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                  ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
                  ->get();

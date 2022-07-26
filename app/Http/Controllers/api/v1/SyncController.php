@@ -31,6 +31,9 @@ class SyncController extends Controller
                 if(isset($value['loan_id'])){
                     $storeCash->loan_id        = $value['loan_id'];
                 }
+                if(isset($value['unique_id'])){
+                    $storeCash->unique_id        = $value['unique_id'];
+                }
                 $storeCash->save();
             }
             return response(["response_code"    => "200203",
