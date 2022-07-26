@@ -26,7 +26,7 @@ class CreateStoreCashesTable extends Migration
             $table->boolean('sync_status');
             $table->timestamp('collected_date');
             $table->unsignedBigInteger('branch_id')->nullable()->default(null);
-            $table->unsignedBigInteger('loan_id')->nullable()->default(null);
+            $table->string('loan_id')->nullable()->default(null);
             $table->string('unique_id')->nullable()->default(null);
             $table->softDeletes(); 
             $table->timestamps();
