@@ -15,7 +15,7 @@ class ReportController extends Controller
                         ->get();
         $users        = User::whereHas('roles', function($q){
                             $q->where('name', 'staff')->orWhere('name','agent');
-                        })->get();;  
+                        })->get();  
         return view ('reports.index',compact('transactions','users'));
     }
 

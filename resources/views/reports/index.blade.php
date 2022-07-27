@@ -96,10 +96,10 @@
                                 <table class="table table-bordered v-center-th-td" id="transactionTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th style="width:50px;">Date</th>
+                                            <th style="width: 60px;">Date</th>
                                             <th>Time</th>
                                             <th>Unique Pin</th>
-                                            <th>Client Name</th>
+                                            <th style="width: 60px;">Client Name</th>
                                             <th>Staff</th>
                                             <th>Amount</th>
                                             <th>Branch</th>
@@ -204,7 +204,7 @@
                     "bFilter": false,
                     "bSort": false,
                     "bInfo": true,
-                    "bAutoWidth": true,
+                    "bAutoWidth": false,
                     "bStateSave": true,
                     "aoColumnDefs": [{
                         'bSortable': false,

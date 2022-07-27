@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link a-blue" href="#">
+                <a class="nav-link a-blue" href="{{route('dashboard')}}">
                     <span>Dashboard</span></a>
             </li>
 
@@ -188,6 +188,13 @@
 
     <!-- Page level custom scripts -->
     <script src="{{asset('template/js/demo/datatables-demo.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('template/vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('template/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{asset('template/js/demo/chart-pie-demo.js')}}"></script>
     @yield('script')
 
 </body>

@@ -12074,3 +12074,7 @@ width: calc(var(--user-mgmt-con-width) / 2);
 .pos-r {
     position: relative;
 }
+
+.dashborad-card-height {
+    height: 170px;
+}
