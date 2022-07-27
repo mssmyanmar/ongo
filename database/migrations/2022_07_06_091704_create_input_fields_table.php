@@ -17,6 +17,7 @@ class CreateInputFieldsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->string('display_name');
+            $table->string('identifier');
             $table->string('validation_regx');
             $table->integer('display_order');
             $table->string('field_type');
@@ -24,6 +25,7 @@ class CreateInputFieldsTable extends Migration
             $table->string('min')->nullable()->default(null);
             $table->string('max')->nullable()->default(null);
             $table->string('branch_data')->nullable()->default(null);
+            $table->string('format')->nullable()->default(null);
             $table->softDeletes(); 
             $table->timestamps();
             $table->foreign('client_id')

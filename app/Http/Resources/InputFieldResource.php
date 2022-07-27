@@ -26,7 +26,8 @@ class InputFieldResource extends JsonResource
         }
         return [
             'id'                => $this->id,
-            'display_name'      => $this->display_name, 
+            'display_name'      => $this->display_name,
+            'identifier'        => $this->identifier,
             'validation_regex'  => $this->validation_regx,
             'display_order'     => $this->display_order, 
             'field_type'        => $this->field_type, 
@@ -34,6 +35,7 @@ class InputFieldResource extends JsonResource
             'min'               => $this->min, 
             'max'               => $this->max,
             'branch_data'       => isset($this->branch_data)?$branchArray:null,
+            'format'            => $this->format,
         ];
     }
 }

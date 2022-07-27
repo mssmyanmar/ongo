@@ -11,9 +11,9 @@ class inputField extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable=[
-        'client_id', 'display_name', 'validation_regx', 
+        'client_id', 'display_name', 'identifier', 'validation_regx', 
         'display_order', 'field_type', 'isRequired',
-         'min', 'max', 'branch_data',
+         'min', 'max', 'branch_data','format',
     ];
 
     public function client()
