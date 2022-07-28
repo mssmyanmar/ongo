@@ -41,7 +41,7 @@ class UserController extends Controller
         //dd($request);
         $validator = $request->validate([
             'name'           => ['required', 'string', 'max:255'],
-            'password'       => ['required','min:6',],
+            'password'       => ['required','min:6','max:6'],
             'phone_number'   => ['required','unique:users'],
             'address'        => ['required','string'],
             'role'           => ['required'],
@@ -116,7 +116,7 @@ class UserController extends Controller
         //dd($request);
         $validator = $request->validate([
             'name'           => ['required', 'string', 'max:255'],
-            'password'       => ['required','min:6',],
+            'password'       => ['required','min:6','max:6'],
             'phone_number'   => ['required'],
             'address'        => ['required','string'],
             'role'           => ['required'],

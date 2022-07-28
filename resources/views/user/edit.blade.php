@@ -50,7 +50,7 @@
                       name="password"
                       value="{{$user->password}}"
                     />
-                    <button type="submit" class="btn-green-2">Generate</button>
+                    <a class="btn btn-green-2 btn_generate">Generate</a>
                   </div>
                   <div class="form-control-feedback text-danger"> {{$errors->first('password') }} </div>
                 </div>
@@ -169,6 +169,11 @@
           $(".staff-code").addClass("d-none");
           $(".staff-code").hide();
         }
+      })
+
+      $(".btn_generate").click(function(){
+        var number = Math.floor(100000 + Math.random() * 900000);
+        $("#passcode").val(number);
       })
     })
 </script>

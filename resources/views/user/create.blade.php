@@ -44,11 +44,11 @@
                   <div class="flx-h50-c-center">
                     <input
                       class="form-control fg-if-width mr-3 py-3 bdr-gray br-8p fc-21"
-                      type="password"
+                      type="number"
                       id="passcode"
                       name="password"
                     />
-                    <button type="submit" class="btn-green-2">Generate</button>
+                    <a class="btn btn-green-2 btn_generate">Generate</a>
                   </div>
                   <div class="form-control-feedback text-danger"> {{$errors->first('password') }} </div>
                 </div>
@@ -153,6 +153,8 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
+
+
       $(".staff-code").hide();
       $("#userrole").change(function(){
         let role = $(this).val();
@@ -164,6 +166,11 @@
           $(".staff-code").addClass("d-none");
           $(".staff-code").hide();
         }
+      })
+
+      $(".btn_generate").click(function(){
+        var number = Math.floor(100000 + Math.random() * 900000);
+        $("#passcode").val(number);
       })
     })
 </script>
