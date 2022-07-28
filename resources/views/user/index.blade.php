@@ -83,7 +83,7 @@
                                             <form action="{{ route('users.destroy',$user->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn" type="submit"><i class="fa-solid fa-trash" style="color:#72F573"></i></button>
+                                                <button class="btn" type="submit"><i class="fa-solid fa-trash trash-icon-red"></i></button>
                                             </form>
                                         </div>
                                     </th>
@@ -232,7 +232,7 @@
                             <form action="${userdelete}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn" type="submit"><i class="fa-solid fa-trash" style="color:#72F573"></i></button>
+                                                <button class="btn" type="submit"><i class="fa-solid fa-trash trash-icon-red"></i></button>
                             </form>
                             </div>`
                         }
@@ -242,5 +242,6 @@
                 });
         });
     })
+    $.fn.dataTable.ext.classes.sPageButton = 'pagi-btn-green';
 </script>
 @endsection

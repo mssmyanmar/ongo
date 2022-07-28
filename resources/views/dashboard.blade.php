@@ -13,39 +13,33 @@
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card shadow py-2 dashborad-card-height">
-                <div class="card-body text-center">
-                    <div class="mt-3">
-                        <i class="fa-solid fa-user fa-2xl"></i><br>
-                        <span>Total Clients</span>
-                        <h5>{{$clientCounts}}</h5>
-                    </div>
+            <div class="card shadow dashborad-card-height main-hvr">
+                <div class="card-body text-center hvr-effect h-100pnt d-flex flex-column justify-content-around align-items-center">
+                    <div class="admin-blk-icon"><i class="fa-solid fa-user full-fa"></i></div>
+                    <div class="admin-blk-title">Total Clients</div>
+                    <div class="admin-blk-no">{{$clientCounts}}</div>
                 </div>
             </div>
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card shadow py-2 dashborad-card-height">
-                <div class="card-body text-center">
-                    <div class="mt-3">
-                        <i class="fa-solid fa-users fa-2xl"></i><br>
-                        <span>Total App users</span>
-                        <h5>{{$appStaffCounts}}</h5>
-                    </div>
+            <div class="card shadow dashborad-card-height main-hvr">
+                <div class="card-body text-center hvr-effect h-100pnt d-flex flex-column justify-content-around align-items-center">
+                    <div class="admin-blk-icon"><i class="fa-solid fa-users full-fa"></i></div>
+                    <div class="admin-blk-title">Total App users</div>
+                    <div class="admin-blk-no">{{$appStaffCounts}}</div>
                 </div>
             </div>
         </div>
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card shadow py-2 dashborad-card-height">
-                <div class="card-body text-center">
-                    <div class="mt-3">
-                        <i class="fa-solid fa-user-tie fa-2xl"></i><br>
-                        <span>Total staffs</span>
-                        <h5>{{$allStaffCounts}}</h5>
-                    </div>
+            <div class="card shadow dashborad-card-height main-hvr">
+                <div class="card-body text-center hvr-effect h-100pnt d-flex flex-column justify-content-around align-items-center">
+                    <div class="admin-blk-icon"><i class="fa-solid fa-user-tie full-fa"></i></div>
+                    <div class="admin-blk-title">Total staffs</div>
+                    <div class="admin-blk-no">{{$allStaffCounts}}</div>
                 </div>
             </div>
         </div>

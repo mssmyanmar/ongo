@@ -4,19 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-12 d-flex">
-            <h6 class="um-title">Reports Management/</h6><span class="mt-1 spanMessage">User Reports</span>
+            <h6 class="um-title">Reports Management / </h6><span class="mt-1 spanMessage">&nbsp;User Reports</span>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12">
             <ul class="nav nav-pills">
                 <li class="nav-item active">
-                  <a class="nav-link active btnUser" data-toggle="pill" href="#userReport" style="color:white">
+                  <a class="nav-link active btnUser report-btn-width" data-toggle="pill" href="#userReport" style="color:white">
                     User Reports
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link btnTransaction" data-toggle="pill" href="#transaction" style="color:black;font-weight:bold">
+                  <a class="nav-link btnTransaction report-btn-width" data-toggle="pill" href="#transaction" style="color:black;font-weight:bold">
                     Transaction Reports
                   </a>
                 </li>
@@ -24,12 +24,10 @@
 
               <div class="tab-content">
                 <div id="userReport" class="tab-pane active">
-                    <div class="row mt-3">
-                        <div class="col-3">
-                            <p class="form-check-label active-or-not">Choose App User Type:</p>
-                        </div>
-                        <div class="col-4">
-                            <select class="form-control shadow userType">
+                    <div class="mt-3"> 
+                        <div class="form-check-label active-or-not in-blk">Choose App User Type:</div>
+                        <div class="in-blk">
+                            <select class="form-control shadow userType ch-p">
                                 <option>Choose Type</option>
                                 <option value="all">ALLL</option>
                                 <option value="staff">Staff</option>
@@ -67,24 +65,30 @@
                 </div>
                 <div id="transaction" class="tab-pane">
                     <div class="d-flex mt-3 justify-content-between">
-                        <div class="form-check">
-                            <input class="form-check-input tranBox mt-2" type="checkbox" id="icrc" value="1">
-                            <label class="form-check-label active-or-not mt-1" for="icrc">
-                            ICRC
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input tranBox mt-2" type="checkbox" id="lolc" value="2">
-                            <label class="form-check-label active-or-not mt-1" for="lolc">
-                                LOLC
-                            </label>
-                        </div>
-                        <div class="form-group ml-3">
-                            <p class="form-check-label active-or-not">Start Date: <input type="text" id="startDate"></p>
-                        </div>
-                        <div class="form-group ml-3">
-                            <p class="form-check-label active-or-not">End Date: <input type="text" id="endDate"></p>
-                        </div>
+                        {{-- <div class="d-flex"> --}}
+                            <div class="form-check">
+                                <input class="form-check-input tranBox mt-2" type="checkbox" id="icrc" value="1">
+                                <label class="form-check-label active-or-not mt-1" for="icrc">
+                                ICRC
+                                </label>
+                            </div>
+                            <div class="form-check ml-3">
+                                <input class="form-check-input tranBox mt-2" type="checkbox" id="lolc" value="2">
+                                <label class="form-check-label active-or-not mt-1" for="lolc">
+                                    LOLC
+                                </label>
+                            </div>
+                        {{-- </div> --}}
+
+                        {{-- <div class="d-flex"> --}}
+                            <div class="form-group ml-3">
+                                <p class="form-check-label active-or-not">Start Date: <input type="text" id="startDate" class="date-w"></p>
+                            </div>
+                            <div class="form-group ml-3">
+                                <p class="form-check-label active-or-not">End Date: <input type="text" id="endDate" class="date-w"></p>
+                            </div>
+                        {{-- </div> --}}
+
                         <div>
                             <button class="btn btn-primary btn-search">Search</button>
                         </div>
@@ -167,12 +171,12 @@
         });
 
         $(".btnUser").click(function(){
-            $(".spanMessage").html("User Reports");
+            $(".spanMessage").html("&nbsp;User Reports");
             $(this).css({"color": "white"});
             $(".btnTransaction").css({"color":"black","font-weight":"bold"});
         })
         $(".btnTransaction").click(function(){
-            $(".spanMessage").html("Transactions Reports");
+            $(".spanMessage").html("&nbsp;Transactions Reports");
             $(this).css({"color": "white"});
             $(".btnUser").css({"color":"black","font-weight":"bold"});
         })
@@ -378,5 +382,6 @@
                 });
         })
     })
+    $.fn.dataTable.ext.classes.sPageButton = 'pagi-btn-green';
 </script>
 @endsection
