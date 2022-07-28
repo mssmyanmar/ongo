@@ -181,10 +181,6 @@
           oldPhone = $(this).val();
           $(this).val("09");
       })
-
-      $("#phonenumber").blur(function() {
-        $(this).val(oldPhone);
-      })
     })
 </script>
 @endsection
