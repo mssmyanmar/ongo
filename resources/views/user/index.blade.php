@@ -194,13 +194,23 @@
                         {
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                                return `<div class="t-flex-center">
-                                            <label class="switch my-auto">
-                                                <input type="checkbox" class="btn_status" disabled="disabled" checked>
-                                                <span class="slider round"></span>
-                                            </label>
-                                            <span class="my-auto">Active</span>
-                                        </div>`           
+                                if(data.active_status==1){
+                                    return `<div class="t-flex-center">
+                                                <label class="switch my-auto">
+                                                    <input type="checkbox" class="btn_status" disabled="disabled" checked>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <span class="my-auto">Active</span>
+                                            </div>`  
+                                }else{
+                                    return `<div class="t-flex-center">
+                                                <label class="switch my-auto">
+                                                    <input type="checkbox" class="btn_status" disabled="disabled">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                                <span class="my-auto">Inactive</span>
+                                            </div>`
+                                }          
                             }
                         },
                         {
