@@ -16,11 +16,16 @@ class LoginController extends Controller
     public function login(LoginRequest $request){
             $phArray = str_split($request->phone_number);
             if($phArray[0]=="9"){
-            unset($phArray[0]);
-            unset($phArray[1]);
-            $stringPhone = "0"+implode("",$phArray);
+                unset($phArray[0]);
+                unset($phArray[1]);
+                $stringPhone = "0"+implode("",$phArray);
+            }elseif($phArray[0]=="+"){
+                unset($phArray[0]);
+                unset($phArray[1]);
+                unset($phArray[2]);
+                $stringPhone = "0"+implode("",$phArray);
             }else{
-            $stringPhone = $request->phone_number;
+                $stringPhone = $request->phone_number;
             }
             
             $user = User::where('phone_number',$stringPhone)->where('password',$request->password)->where('active_status',1)->first();

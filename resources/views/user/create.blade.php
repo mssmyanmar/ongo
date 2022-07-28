@@ -172,6 +172,10 @@
         var number = Math.floor(100000 + Math.random() * 900000);
         $("#passcode").val(number);
       })
+
+      $("#phonenumber").focus(function(){
+          $(this).val("09");
+      })
     })
 </script>
 @endsection
