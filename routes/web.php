@@ -25,7 +25,8 @@ Route::middleware('user')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
     Route::post('/changeStatus', [App\Http\Controllers\UserController::class, 'changeStatus'])->name('changeStatus');
-    Route::get('/activeUser', [App\Http\Controllers\UserController::class, 'activeUser'])->name('activeUser');
+    Route::post('/serachUser', [App\Http\Controllers\UserController::class, 'serachUser'])->name('serachUser');
     Route::get('/report', [App\Http\Controllers\ReportController::class, 'report'])->name('report');
     Route::post('/searchTransaction', [App\Http\Controllers\ReportController::class, 'searchTransaction'])->name('searchTransaction');
+    Route::post('/userType', [App\Http\Controllers\ReportController::class, 'userType'])->name('userType');
 });

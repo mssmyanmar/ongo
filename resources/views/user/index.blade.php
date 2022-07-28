@@ -6,20 +6,25 @@
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h6 class="um-title">User Management</h6>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="active_only" class="active_only">
+                <input class="form-check-input active_only" type="checkbox" id="active_only" value="active">
                 <label class="form-check-label active-or-not" for="defaultCheck1">
                     Active Only
                 </label>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <div class="form-group ml-4 mb-0">
-                    <input type="text" class="form-control shadow" id="name" placeholder="Enter Name">
+                    <input type="text" class="form-control shadow userName" id="name" placeholder="Enter Name">
                 </div>
                 <div class="form-group ml-2 mb-0">
-                    <input type="text" class="form-control shadow" id="role" placeholder="Enter Role">
+                    <select class="form-control shadow userType">
+                        <option value="">Choose Role</option>
+                    @foreach($roles as $row)
+                        <option value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach
+                    </select>
                 </div>
                 <div class="ml-4">
-                    <button type="button" class="btn btn-dark px-3 btn_search"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</button>
+                    <a  class="btn btn-dark px-3 btn_search"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</a>
                 </div>
             </div>
         </div>
@@ -107,9 +112,14 @@
             }
         });
 
-        $('#active_only').change(function() {
-             if(this.checked) {
-                var table = $('#myTable').DataTable();
+        $('.btn_search').click(function() {
+            var checkVal;
+            $('.active_only:checked').each(function(i){
+                checkVal = $(this).val();
+            }); 
+            var userName = $(".userName").val();
+            var userType = $(".userType").val();
+            var table = $('#myTable').DataTable();
                 table.destroy();
                 $('#myTable').dataTable({
                     "pageLength": 10,
@@ -140,17 +150,21 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "{{ route('activeUser') }}",
-                        type: 'GET',
+                        url: "{{ route('serachUser') }}",
+                        type: 'POST',
                         dataType: 'json',
+                        data:{
+                          "checkVal" : checkVal,
+                          "userName" : userName,
+                          "userType" : userType,
+                        },
                         global: false,
                         async: true,
                     },
                     "columns": [{
                             "data": null,
                             render: function(data, type, full, meta, row) {
-                                let no = 1;
-                                return no;
+                                return data.DT_RowIndex;
                             }
                         },
                         {
@@ -216,11 +230,6 @@
                     ],
                     "info": true
                 });
-        
-            }else{
-                location.reload();
-            }
-               
         });
     })
 </script>

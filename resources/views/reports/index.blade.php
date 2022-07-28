@@ -24,20 +24,19 @@
 
               <div class="tab-content">
                 <div id="userReport" class="tab-pane active">
-                    {{-- <div class="d-flex mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="icrc" class="icrc">
-                                <label class="form-check-label active-or-not" for="icrc">
-                                ICRC
-                                </label>
-                            </div>
-                            <div class="form-check ml-5">
-                                <input class="form-check-input" type="checkbox" id="lolc" class="lolc">
-                                <label class="form-check-label active-or-not" for="lolc">
-                                    LOLC
-                                </label>
-                            </div>
-                    </div> --}}
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <p class="form-check-label active-or-not">Choose App User Type:</p>
+                        </div>
+                        <div class="col-4">
+                            <select class="form-control shadow userType">
+                                <option>Choose Type</option>
+                                <option value="all">ALLL</option>
+                                <option value="staff">Staff</option>
+                                <option value="agent">Agent</option>
+                            </select>
+                        </div>  
+                    </div>
                     <div class="card shadow mb-4 mt-3">
                         <div class="card-body">
                             <div class="table-responsive mt-3">
@@ -306,6 +305,78 @@
             var strTime = hours + ':' + minutes + ' ' + ampm;
             return strTime;
         }
+
+        $(".userType").change(function(){
+            var userType = $(this).val();
+            var table = $('#userTable').DataTable();
+            table.destroy();
+            $('#userTable').dataTable({
+                    "pageLength": 10,
+                    lengthMenu: [
+                        [10, 25, 50, 100, -1],
+                        [10, 25, 50, 100],
+                    ],
+                    language: {
+                        oPaginate: {
+                            sNext: '>',
+                            sPrevious: '<',
+                        }
+                    },
+                    "bPaginate": true,
+                    "bLengthChange": true,
+                    "bFilter": false,
+                    "bSort": false,
+                    "bInfo": true,
+                    "bAutoWidth": false,
+                    "bStateSave": true,
+                    "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [-1]
+                    }, ],
+                    "bserverSide": true,
+                    "bprocessing": true,
+                    "ajax": {
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('userType') }}",
+                        type: 'POST',
+                        dataType: 'json',
+                        data:{
+                          "userType" : userType,
+                        },
+                        global: false,
+                        async: true,
+                    },
+                    "columns": [
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {;
+                                return  data.DT_RowIndex;
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.name;
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.code;
+                            }
+                        },
+                        {
+                            "data": null,
+                            render: function(data, type, full, meta, row) {
+                                return data.role_name;
+                            }
+                        },
+                    ],
+                    "info": true
+                });
+        })
     })
 </script>
 @endsection

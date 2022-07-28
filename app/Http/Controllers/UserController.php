@@ -16,8 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        return view('user.index',compact('users'));
+        $users = User::all();
+        $roles = DB::table('roles')->get();
+        return view('user.index',compact('users','roles'));
     }
 
     /**
@@ -186,12 +187,67 @@ class UserController extends Controller
         ]);
     }
 
-    public function activeUser(Request $request){
-        $users = User::select('users.*','roles.name as role_name')
-                 ->where('users.active_status',1)
-                 ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                 ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
-                 ->get();
-        return Datatables::of($users)->addIndexColumn()->toJson();
+    public function serachUser(Request $request){
+        if($request->checkVal != null && $request->userName == null && $request->userType == null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.active_status',1)
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal == null && $request->userName != null && $request->userType == null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.name','like', '%' .$request->userName. '%')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal == null && $request->userName == null && $request->userType != null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('roles.id',$request->userType)
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal != null && $request->userName != null && $request->userType == null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.active_status',1)
+            ->where('users.name','like', '%' .$request->userName. '%')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal != null && $request->userName == null && $request->userType != null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.active_status',1)
+            ->where('roles.id',$request->userType)
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal == null && $request->userName != null && $request->userType != null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.name','like', '%' .$request->userName. '%')
+            ->where('roles.id',$request->userType)
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->checkVal != null && $request->userName != null && $request->userType != null){
+            $users = User::select('users.*','roles.name as role_name')
+            ->where('users.active_status',1)
+            ->where('users.name','like', '%' .$request->userName. '%')
+            ->where('roles.id',$request->userType)
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }else{
+            $users = User::select('users.*','roles.name as role_name')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->get();
+            return Datatables::of($users)->addIndexColumn()->toJson(); 
+        }
     }
 }

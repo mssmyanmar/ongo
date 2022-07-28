@@ -74,4 +74,35 @@ class ReportController extends Controller
            return Datatables::of($transactions)->addIndexColumn()->toJson();
         }
     }
+
+    public function userType(Request $request){
+        if($request->userType == "all"){
+            $users = User::select('users.*','roles.name as role_name')
+                    ->whereHas('roles', function($q){
+                            $q->where('name', 'staff')->orWhere('name','agent');
+                        })
+                    ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                    ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                    ->get(); 
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }elseif($request->userType == "staff"){
+            $users = User::select('users.*','roles.name as role_name')
+                     ->whereHas('roles', function($q){
+                            $q->where('name', 'staff');
+                       })
+                     ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                     ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                     ->get(); 
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }else{
+            $users = User::select('users.*','roles.name as role_name')
+                     ->whereHas('roles', function($q){
+                            $q->where('name', 'agent');
+                        })
+                     ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                     ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                     ->get(); 
+            return Datatables::of($users)->addIndexColumn()->toJson();
+        }
+    }
 }
