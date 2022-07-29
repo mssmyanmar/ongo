@@ -12073,6 +12073,16 @@ width: calc(var(--user-mgmt-con-width) / 2);
     color: #999999;
 }
 
+.fa2 {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    bottom: 11px;
+    right: 16px;
+    font-size: 15px;
+    color: #999999;
+}
+
 .pos-r {
     position: relative;
 }
@@ -12192,5 +12202,54 @@ width: calc(var(--user-mgmt-con-width) / 2);
 }
 
 .date-w {
-    width: 7.2rem;
+    width: 8.2rem;
+}
+
+/* Generate Button */
+.btn_generate {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.btn_generate:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Choose Role */
+.userType {
+    width: 9rem;
+}
+
+/* Search Button */
+.btn_search {
+    background-color: #4e73df;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.btn_search:hover,
+.btn_search:focus {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Calender */
+.c-green {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    bottom: 7px;
+    right: 12px;
+    font-size: 15px;
+    color: rgba(98, 96, 110, 0.75);
+}
+
+#startDate:focus + .c-green {
+    display: none;
+}
+
+#endDate:focus + .c-green {
+    display: none;
+}
+
+#startDate:hover + .c-green,
+#endDate:hover + .c-green {
+    color: rgba(98, 96, 110, 1);
 }

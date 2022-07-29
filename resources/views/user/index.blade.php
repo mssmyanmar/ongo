@@ -15,16 +15,17 @@
                 <div class="form-group ml-4 mb-0">
                     <input type="text" class="form-control shadow userName" id="name" placeholder="Enter Name">
                 </div>
-                <div class="form-group ml-2 mb-0">
-                    <select class="form-control shadow userType">
+                <div class="form-group pos-r ml-2 mb-0">
+                    <select class="form-control shadow userType selectpicker">
                         <option value="">Choose Role</option>
                     @foreach($roles as $row)
                         <option value="{{$row->id}}">{{$row->name}}</option>
                     @endforeach
-                    </select>
+                </select>
+                <i class="fa fa-chevron-down fa2"></i>
                 </div>
                 <div class="ml-4">
-                    <a  class="btn btn-dark px-3 btn_search"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</a>
+                    <a  class="btn px-3 btn_search"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</a>
                 </div>
             </div>
         </div>

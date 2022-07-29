@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-      <h6 style="font-weight: bold;color:black">User Management</h6>
+      <div class="d-flex justify-content-between">
+        <h6 style="font-weight: bold;color:black">User Management</h6>
+        <a href="{{ route('users.index') }}" class="btn btn-sm btn-dark"><i class="fa-solid fa-arrow-left-long"></i> back</a>
+      </div>
       <div class="card mx-auto mb-5 mt-3">
         <div class="row ml-3">
             <div class="col-lg-6 col-md-6 col-sm-12">

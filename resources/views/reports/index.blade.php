@@ -9,30 +9,30 @@
     </div>
     <div class="row mt-4">
         <div class="col-12">
-            <ul class="nav nav-pills">
-                <li class="nav-item active">
-                  <a class="nav-link active btnUser report-btn-width" data-toggle="pill" href="#userReport" style="color:white">
-                    User Reports
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link btnTransaction report-btn-width" data-toggle="pill" href="#transaction" style="color:black;font-weight:bold">
-                    Transaction Reports
-                  </a>
-                </li>
-              </ul>
+                <ul class="nav nav-pills">
+                    <li class="nav-item active">
+                      <a class="nav-link active btnUser report-btn-width" data-toggle="pill" href="#userReport" style="color:white">
+                        User Reports
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link btnTransaction report-btn-width" data-toggle="pill" href="#transaction" style="color:black;font-weight:bold">
+                        Transaction Reports
+                      </a>
+                    </li>
+                </ul>
 
-              <div class="tab-content">
+            <div class="tab-content">
                 <div id="userReport" class="tab-pane active">
-                    <div class="mt-3"> 
-                        <div class="form-check-label active-or-not in-blk">Choose App User Type:</div>
-                        <div class="in-blk">
-                            <select class="form-control shadow userType ch-p">
-                                <option>Choose Type</option>
-                                <option value="all">ALLL</option>
+                    <div class="d-flex justify-content-end align-items-center mt-3"> 
+                        <div class="form-check-label active-or-not in-blk mr-2">Choose App User Type:</div>
+                        <div class="in-blk pos-r">
+                            <select class="form-control shadow userType ch-p selectpicker">
+                                <option value="all">All</option>
                                 <option value="staff">Staff</option>
                                 <option value="agent">Agent</option>
                             </select>
+                            <i class="fa fa-chevron-down fa2"></i>
                         </div>  
                     </div>
                     <div class="card shadow mb-4 mt-3">
@@ -82,15 +82,15 @@
 
                         {{-- <div class="d-flex"> --}}
                             <div class="form-group ml-3">
-                                <p class="form-check-label active-or-not">Start Date: <input type="text" id="startDate" class="date-w"></p>
+                                <p class="form-check-label active-or-not pos-r">Start Date: <input type="text" id="startDate" class="date-w"><i class="fa-solid fa-calendar-days c-green"></i></p>
                             </div>
                             <div class="form-group ml-3">
-                                <p class="form-check-label active-or-not">End Date: <input type="text" id="endDate" class="date-w"></p>
+                                <p class="form-check-label active-or-not pos-r">End Date: <input type="text" id="endDate" class="date-w"><i class="fa-solid fa-calendar-days c-green"></i></p>
                             </div>
                         {{-- </div> --}}
 
                         <div>
-                            <button class="btn btn-primary btn-search">Search</button>
+                            <button class="btn btn-primary btn-search btn-sm"><i class="fa-solid fa-magnifying-glass mr-2"></i>Search</button>
                         </div>
                     </div>
                     <div class="card shadow mb-4 mt-3">
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 </div>

@@ -33,13 +33,15 @@ class LoginController extends Controller
     {
         $user = User::where( 'phone_number',$request->phone_number)->where('password',$request->password)->first();
         if($user) {
+            $role_name = $user->getRoleNames()[0];
             Session::put('user_id', $user->id);
             Session::put('name', $user->name);
             Session::put('phone_number', $user->phone_number);
             Session::put('address', $user->address);
             Session::put('name', $user->name);
             Session::put('active_status', $user->active_status);
-            return redirect()->route( 'users.index' );
+            Session::put('role_name', $role_name);
+            return redirect()->route( 'dashboard' );
         }else{
             return redirect()->back()->withErrors( 'login invalid' );
         }
