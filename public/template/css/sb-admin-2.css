@@ -12253,3 +12253,8 @@ width: calc(var(--user-mgmt-con-width) / 2);
 #endDate:hover + .c-green {
     color: rgba(98, 96, 110, 1);
 }
+
+/* Logo */
+.sidebar-brand-icon {
+    max-width: 100%;
+}

@@ -53,7 +53,7 @@
                                             <tr>
                                                 <td>{{$no++}}</td>
                                                 <td>{{$row->name}}</td>
-                                                <td>{{$row->code}}D</td>
+                                                <td>{{$row->code}}</td>
                                                 <td>{{$row->roles->pluck('name')[0]}}</td>
                                             </tr>
                                         @endforeach

@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-start" href="{{route('dashboard')}}">
                 <div class="sidebar-brand-icon">
                     <img src="{{asset('template/img/OnGo_logo.svg')}}" alt="" style="width:135px;height:40px;">
                 </div>
