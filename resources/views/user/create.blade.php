@@ -36,6 +36,7 @@
                     id="phonenumber"
                     name="phone_number"
                     value="{{ old('phone_number') }}"
+                    placeholder="09*********"
                   />
                   <div class="form-control-feedback text-danger"> {{$errors->first('phone_number') }} </div>
                 </div>
@@ -45,12 +46,22 @@
                 <div class="form-group">
                   <label for="passcode" style="color: #212121">Passcode</label>
                   <div class="flx-h50-c-center">
-                    <input
-                      class="form-control fg-if-width mr-3 py-3 bdr-gray br-8p fc-21"
-                      type="number"
-                      id="passcode"
-                      name="password"
-                    />
+  
+                    <div class="input-group fg-if-width mr-3">
+                      <input
+                        class="form-control py-3 bdr-gray br-8p fc-21"
+                        type="password"
+                        id="passcode"
+                        name="password"
+                      />
+                      <div class="input-group-append">
+                        <span class="input-group-text btn_eye">
+                          <i class="fas fa-eye" id="show_eye"></i>
+                          <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                        </span>
+                      </div>
+                    </div>
+
                     <a class="btn btn-green-2 btn_generate">Generate</a>
                   </div>
                   <div class="form-control-feedback text-danger"> {{$errors->first('password') }} </div>
@@ -66,11 +77,10 @@
                     name="role"
                   >
                     <option selected value="">Select the role of the user</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Supervisor</option>
-                    <option value="3">Staff</option>
-                    <option value="4">Shop Agent</option>
-                    <option value="5">Office Staff</option>
+                    <option value="1" {{old ('role') == 1 ? 'selected' : ''}}>Admin</option>
+                    <option value="2" {{old ('role') == 2 ? 'selected' : ''}}>Supervisor</option>
+                    <option value="3" {{old ('role') == 3 ? 'selected' : ''}}>Staff</option>
+                    <option value="4" {{old ('role') == 4 ? 'selected' : ''}}>Shop Agent</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>
@@ -101,9 +111,8 @@
                     id="fulladdress"
                     rows="4"
                     name="address"
-                    value="{{ old('address') }}"
                     required
-                  ></textarea>
+                  >{{ old('address') }}</textarea>
                   <div class="form-control-feedback text-danger"> {{$errors->first('address') }} </div>
                 </div>
               </div>
@@ -116,8 +125,8 @@
                     id="userstatus" name="active_status"
                   >
                     <option selected value="">Select the status of the user</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                    <option value="1" {{old ('active_status') == 1 ? 'selected' : ''}}>Active</option>
+                    <option value="2" {{old ('active_status') == 2 ? 'selected' : ''}}>Inactive</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>
@@ -156,9 +165,13 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
-
-
       $(".staff-code").hide();
+
+      if($("#userrole").val()==3 || $("#userrole").val()==4){
+        $(".staff-code").removeClass("d-none");      
+        $(".staff-code").show();
+      }
+      
       $("#userrole").change(function(){
         let role = $(this).val();
         if(role==3 || role==4){
@@ -176,8 +189,20 @@
         $("#passcode").val(number);
       })
 
-      $("#phonenumber").focus(function(){
-          $(this).val("09");
+      $(".btn_eye").click(function(){
+        var x = document.getElementById("passcode"); 
+        var show_eye = document.getElementById("show_eye"); 
+        var hide_eye = document.getElementById("hide_eye"); 
+        hide_eye.classList.remove("d-none");
+        if (x.type === "password") { 
+          x.type = "text";
+          show_eye.style.display = "none"; 
+          hide_eye.style.display = "block";
+         } else { 
+          x.type = "password"; 
+          show_eye.style.display = "block";
+          hide_eye.style.display = "none"; 
+        } 
       })
     })
 </script>

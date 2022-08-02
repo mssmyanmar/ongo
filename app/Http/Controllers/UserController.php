@@ -43,11 +43,11 @@ class UserController extends Controller
         $validator = $request->validate([
             'name'           => ['required', 'string', 'max:255'],
             'password'       => ['required','numeric','digits:6'],
-            'phone_number'   => ['required','unique:users','digits:11'],
+            'phone_number'   => ['required','numeric', 'unique:users','digits_between:9,11'],
             'address'        => ['required','string'],
             'role'           => ['required'],
-            'active_status'  => ['required','boolean'],
-            'nrc'            => ['string','unique:users'],
+            'active_status'  => ['required'],
+            'nrc'            => ['nullable','unique:users'],
         ]);
         if($validator){
             $user                = new User;
@@ -55,7 +55,7 @@ class UserController extends Controller
             $user->phone_number  = $request->phone_number;
             $user->password      = $request->password;
             $user->address       = $request->address;
-            $user->active_status = $request->active_status;
+            $user->active_status = $request->active_status==1 ? 1 : 0;
             $user->nrc           = $request->nrc;
             if(isset($request->code)){
                 $user->code = $request->code;
@@ -71,8 +71,6 @@ class UserController extends Controller
                 $user->assignRole('staff');
             }else if ($request->role=="4"){
                 $user->assignRole('agent');
-            }else if ($request->role=="5"){
-                $user->assignRole('office_staff');
             }   
             return redirect()->route('users.index')->with("successMsg",'New User is ADDED in your data');
         }
@@ -117,12 +115,12 @@ class UserController extends Controller
         //dd($request);
         $validator = $request->validate([
             'name'           => ['required', 'string', 'max:255'],
-            'password'       => ['required','numeric','digits:6'],
-            'phone_number'   => ['required','digits:11'],
+            'password'       => ['required', 'numeric', 'digits:6'],
+            'phone_number'   => ['required', 'numeric', 'digits_between:9,11'],
             'address'        => ['required','string'],
             'role'           => ['required'],
-            'active_status'  => ['required','boolean'],
-            'nrc'            => ['string'],
+            'active_status'  => ['required'],
+            'nrc'            => ['nullable'],
         ]);
         if($validator){
             $user                = User::find($id);
@@ -130,7 +128,7 @@ class UserController extends Controller
             $user->phone_number  = $request->phone_number;
             $user->password      = $request->password;
             $user->address       = $request->address;
-            $user->active_status = $request->active_status;
+            $user->active_status = $request->active_status==1 ? 1 : 0;
             $user->nrc           = $request->nrc;
             if(isset($request->code)){
                 $user->code = $request->code;
@@ -147,9 +145,7 @@ class UserController extends Controller
                 $user->assignRole('staff');
             }else if ($request->role=="4"){
                 $user->assignRole('agent');
-            }else if ($request->role=="5"){
-                $user->assignRole('office_staff');
-            }   
+            } 
             return redirect()->route('users.index')->with("successMsg",'New User is ADDED in your data');
         }
         else

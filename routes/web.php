@@ -29,4 +29,5 @@ Route::middleware('user')->group(function () {
     Route::get('/report', [App\Http\Controllers\ReportController::class, 'report'])->name('report');
     Route::post('/searchTransaction', [App\Http\Controllers\ReportController::class, 'searchTransaction'])->name('searchTransaction');
     Route::post('/userType', [App\Http\Controllers\ReportController::class, 'userType'])->name('userType');
+    Route::post('export', [App\Http\Controllers\ReportController::class, 'export'])->name('export');
 });

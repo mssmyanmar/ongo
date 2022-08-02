@@ -36,6 +36,9 @@
                         </div>  
                     </div>
                     <div class="card shadow mb-4 mt-3">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="mt-2 font-weight-bold float-left ut-title">User Report Table</h6>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive mt-3">
                                 <table class="table table-bordered v-center-th-td" id="userTable" width="100%" cellspacing="0">
@@ -94,6 +97,12 @@
                         </div>
                     </div>
                     <div class="card shadow mb-4 mt-3">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="mt-2 font-weight-bold float-left ut-title">Transactions Report Table</h6>
+                            <div><a href="#" type="button" class="btn btn_export" style="background-color: #72F573">
+                                <i class="fa-solid fa-file-export export-i-white mr-2"></i><span class="txt-white">Export</span></a>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive mt-3">
                                 <table class="table table-bordered v-center-th-td" id="transactionTable" width="100%" cellspacing="0">
@@ -101,7 +110,7 @@
                                         <tr>
                                             <th style="width: 60px;">Date</th>
                                             <th>Time</th>
-                                            <th>Unique Pin</th>
+                                            <th>Merchant ID</th>
                                             <th style="width: 60px;">Client Name</th>
                                             <th>Staff</th>
                                             <th>Amount</th>
@@ -160,7 +169,6 @@
         });
 
         $('#transactionTable').dataTable({
-            "bFilter": false,
             "bSort": false,
             language: {
                 oPaginate: {
@@ -204,7 +212,7 @@
                     },
                     "bPaginate": true,
                     "bLengthChange": true,
-                    "bFilter": false,
+                    "bFilter": true,
                     "bSort": false,
                     "bInfo": true,
                     "bAutoWidth": false,
@@ -379,6 +387,53 @@
                         },
                     ],
                     "info": true
+                });
+        })
+
+        $(".btn_export").click(function(){
+            var checkVal = [];
+            $('.tranBox:checked').each(function(i){
+                checkVal[i] = $(this).val();
+            });
+            var startDate = $("#startDate").val();
+            var endDate   = $("#endDate").val();
+            $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    xhrFields: {
+                        responseType: 'blob',
+                    },
+                    type: 'POST',
+                    url: "{{route('export')}}",
+                    data: {
+                        checkVal : checkVal,
+                        startDate: startDate,
+                        endDate  : endDate,
+                    },
+                    success: function(result, status, xhr) {
+                        var disposition = xhr.getResponseHeader(
+                            'content-disposition');
+                        var matches = /"([^"]*)"/.exec(disposition);
+                        var filename = (matches != null && matches[1] ? matches[1] :
+                            'transaction.csv');
+                        // The actual download
+                        var blob = new Blob([result], {
+                            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                        });
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = filename;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    },
+                    error: function(result) {
+                        // $(".errorAlert").html("集計対象データがありません！")
+                        // $(".errorAlert").addClass("alert-danger")
+                        // $(".errorAlert").show();
+                        // hideAlert();
+                    }
                 });
         })
     })

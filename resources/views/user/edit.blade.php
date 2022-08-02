@@ -36,6 +36,7 @@
                     class="form-control py-3 bdr-gray br-8p fc-21"
                     id="phonenumber"
                     name="phone_number"
+                    placeholder="09*********"
                     value="{{$user->phone_number}}"
                   />
                   <div class="form-control-feedback text-danger"> {{$errors->first('phone_number') }} </div>
@@ -46,13 +47,21 @@
                 <div class="form-group">
                   <label for="passcode" style="color: #212121">Passcode</label>
                   <div class="flx-h50-c-center">
-                    <input
-                      class="form-control fg-if-width mr-3 py-3 bdr-gray br-8p fc-21"
-                      type="text"
-                      id="passcode"
-                      name="password"
-                      value="{{$user->password}}"
-                    />
+                    <div class="input-group fg-if-width mr-3">
+                      <input
+                        class="form-control py-3 bdr-gray br-8p fc-21"
+                        type="password"
+                        id="passcode"
+                        name="password"
+                        value="{{$user->password}}"
+                      />
+                      <div class="input-group-append">
+                        <span class="input-group-text btn_eye">
+                          <i class="fas fa-eye" id="show_eye"></i>
+                          <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                        </span>
+                      </div>
+                    </div>
                     <a class="btn btn-green-2 btn_generate">Generate</a>
                   </div>
                   <div class="form-control-feedback text-danger"> {{$errors->first('password') }} </div>
@@ -72,7 +81,6 @@
                     <option value="2" @if($user->roles->pluck('id')[0]==2) selected @endif>Supervisor</option>
                     <option value="3" @if($user->roles->pluck('id')[0]==3) selected @endif>Staff</option>
                     <option value="4" @if($user->roles->pluck('id')[0]==4) selected @endif>Shop Agent</option>
-                    <option value="5" @if($user->roles->pluck('id')[0]==5) selected @endif>Office Staff</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>
@@ -119,7 +127,7 @@
                   >
                     <option selected value="">Select the status of the user</option>
                     <option value="1" @if($user->active_status==1) selected @endif>Active</option>
-                    <option value="0" @if($user->active_status==0) selected @endif>Inactive</option>
+                    <option value="2" @if($user->active_status==0) selected @endif>Inactive</option>
                   </select>
                   <i class="fa fa-chevron-down"></i>
                 </div>
@@ -179,11 +187,22 @@
         $("#passcode").val(number);
       })
 
-      var oldPhone;
-      $("#phonenumber").focus(function(){
-          oldPhone = $(this).val();
-          $(this).val("09");
+      $(".btn_eye").click(function(){
+        var x = document.getElementById("passcode"); 
+        var show_eye = document.getElementById("show_eye"); 
+        var hide_eye = document.getElementById("hide_eye"); 
+        hide_eye.classList.remove("d-none");
+        if (x.type === "password") { 
+          x.type = "text";
+          show_eye.style.display = "none"; 
+          hide_eye.style.display = "block";
+         } else { 
+          x.type = "password"; 
+          show_eye.style.display = "block";
+          hide_eye.style.display = "none"; 
+        } 
       })
+
     })
 </script>
 @endsection
